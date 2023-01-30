@@ -1,0 +1,55 @@
+version: '0.0.1'
+services:
+  pg:
+    image: "postgres:15.1"
+    restart: on-failure
+    env_file: ".env"
+    environment:
+      - POSTGRES_USER=${DBU}
+      - POSTGRES_PASSWORD=${DBP}
+    volumes:
+      - "${ENVIRONMENT}_pg_data:/var/lib/psql/"
+      - "${ENVIRONMENT}_pg_data:/var/lib/postgresql/data/"
+    ports:
+      - "5432:5432"
+  api:
+    build:
+      context: "./something_server"
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      - DBU=${DBU}
+      - DBP=${DBP}
+      - DBH=${DBH}
+      - DBHP=${DBHP}
+      - DBA=${DBA}
+      - AUTH_SECRET=${AUTH_SECRET}
+      - RAILS_ENV=${RAILS_ENV}
+    ports:
+      - "4000:3000"
+    volumes:
+      - ./something_server:/something_server
+      - ${ENVIRONMENT}_server_rails_bundle:/usr/local/bundle
+    depends_on:
+      - pg
+  client:
+    build:
+      context: "./something_client"
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+      - "80:80"
+    volumes:
+      - ./something_client:/something_client
+      - ${ENVIRONMENT}_client_node_modules:/something_client/node_modules
+    depends_on:
+      - api
+      - pg
+volumes:
+    dev_pg_data:
+    prod_pg_data:
+    dev_client_node_modules:
+    dev_server_rails_bundle:
+    prod_client_node_modules:
+    prod_server_rails_bundle:
