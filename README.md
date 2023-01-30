@@ -3,7 +3,7 @@
 - [Git (for Windows)](https://git-scm.com/)
 - [Github CLI](https://cli.github.com/)
 ### Step 2: Run setup script
-**Note: On Windows, open this repository folder, right click -> Git bash here**
+**Note: On Windows, open this repository folder, right click -> Git bash here** </br>
 **Note 2: Remember to auth github client**
 ```bash
 ./setup.sh

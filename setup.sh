@@ -24,6 +24,7 @@ case "$OSTYPE" in
 esac
 
 # USING GITHUB CLI
+gh config set prompt disabled
 gh auth login
 gh repo clone Pennywort-and-Potato/something_server
 gh repo clone Pennywort-and-Potato/something_client
