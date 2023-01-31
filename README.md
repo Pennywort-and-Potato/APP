@@ -28,7 +28,7 @@ Then, Win + R
 ```
 ![Edit environment variable](https://i.imgur.com/wQ4yYzs.png) </br>
 ![Add environment variable](https://i.imgur.com/86SuhXz.png)
-Add this
+</br>Add this
 ```path
 C:\Program Files (x86)\GnuWin32\bin
 ```
