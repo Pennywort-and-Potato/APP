@@ -19,7 +19,7 @@ AUTH_SECRET=EMILIAIZDABEZT  #JWT Secret\n
 case "$OSTYPE" in
   darwin*)  brew install gh ;;
   linux*)   eval 'echo "AVAILABLE ON FUTURE UPDATE" && exit 0' ;;
-  msys*)    winget install --id GitHub.cli ;;
+  msys*)    eval 'echo "--GITHUB CLI--\n" && winget install --id GitHub.cli --accept-package-agreements' ;;
   *)        eval 'echo "UNKNOW SYSTEM: $OSTYPE" && exit 1' ;;
 esac
 

@@ -17,3 +17,22 @@ On Linux or MacOS:
 ```bash
 make [OPTION]
 ```
+### MAKE FOR WINDOWS
+Install WINGNU32
+```bash
+winget install GnuWin32
+```
+Then, Win + R
+```path
+"C:\Windows\system32\rundll32.exe" sysdm.cpl,EditEnvironmentVariables
+```
+![Edit environment variable](https://i.imgur.com/wQ4yYzs.png) </br>
+![Add environment variable](https://i.imgur.com/86SuhXz.png)
+Add this
+```path
+C:\Program Files (x86)\GnuWin32\bin
+```
+Now you can use Makefile via this command:
+```bash
+make.exe [OPTION]
+```
