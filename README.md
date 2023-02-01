@@ -17,7 +17,8 @@ On Linux or MacOS:
 ```bash
 make [OPTION]
 ```
-### MAKE FOR WINDOWS
+### MAKE FOR WINDOWS (~ OLD VERSION)
+**Note: Now you can just run setup.sh**
 Install WINGNU32
 ```bash
 winget install GnuWin32
@@ -36,3 +37,5 @@ Now you can use Makefile via this command:
 ```bash
 make.exe [OPTION]
 ```
+### START SERVICES SCRIPT
+Only work in Macos and Linux

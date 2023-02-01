@@ -18,8 +18,13 @@ AUTH_SECRET=EMILIAIZDABEZT  #JWT Secret\n
 # INSTALL GITHUB CLI
 case "$OSTYPE" in
   darwin*)  brew install gh ;;
-  linux*)   eval 'echo "AVAILABLE ON FUTURE UPDATE" && exit 0' ;;
-  msys*)    eval 'echo "--GITHUB CLI--\n" && winget install --id GitHub.cli --accept-package-agreements' ;;
+  linux*)   type -p curl >/dev/null || sudo apt install curl -y;
+              curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg;
+              sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg;
+              echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null;
+              sudo apt update;
+              sudo apt install gh -y ;;
+  msys*)    cmd < win_deps.bat ;;
   *)        eval 'echo "UNKNOW SYSTEM: $OSTYPE" && exit 1' ;;
 esac
 
