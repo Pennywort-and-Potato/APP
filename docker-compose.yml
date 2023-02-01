@@ -8,8 +8,8 @@ services:
       - POSTGRES_USER=${DBU}
       - POSTGRES_PASSWORD=${DBP}
     volumes:
-      - "${ENVIRONMENT}_pg_data:/var/lib/psql/"
-      - "${ENVIRONMENT}_pg_data:/var/lib/postgresql/data/"
+      - "${ENVIRONMENT}_pg:/var/lib/psql/"
+      - "${ENVIRONMENT}_pg:/var/lib/postgresql/data/"
     ports:
       - "5432:5432"
   api:
@@ -27,11 +27,13 @@ services:
       - AUTH_SECRET=${AUTH_SECRET}
       - RAILS_ENV=${RAILS_ENV}
     ports:
-      - "4000:3000"
+      - "4000:4000"
     volumes:
       - ./something_server:/something_server
-      - ${ENVIRONMENT}_server_rails_bundle:/usr/local/bundle
+      - ${ENVIRONMENT}_bundle:/usr/local/bundle
     depends_on:
+      - pg
+    links:
       - pg
   client:
     build:
@@ -42,14 +44,16 @@ services:
       - "80:80"
     volumes:
       - ./something_client:/something_client
-      - ${ENVIRONMENT}_client_node_modules:/something_client/node_modules
+      - ${ENVIRONMENT}_node_modules:/something_client/node_modules
     depends_on:
       - api
       - pg
+    links:
+      - api
 volumes:
-    dev_pg_data:
-    prod_pg_data:
-    dev_client_node_modules:
-    dev_server_rails_bundle:
-    prod_client_node_modules:
-    prod_server_rails_bundle:
+    dev_pg:
+    prod_pg:
+    dev_bundle:
+    prod_bundle:
+    dev_node_modules:
+    prod_node_modules:

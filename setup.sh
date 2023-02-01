@@ -15,7 +15,7 @@ API_PORT=3000\n
 AUTH_SECRET=EMILIAIZDABEZT  #JWT Secret\n
 #CLIENT_ENV\n
 '
-# INSTALL GITHUB CLI
+INSTALL GITHUB CLI
 case "$OSTYPE" in
   darwin*)  brew install gh ;;
   linux*)   type -p curl >/dev/null || sudo apt install curl -y;
@@ -25,7 +25,8 @@ case "$OSTYPE" in
               sudo apt update;
               sudo apt install gh -y ;;
   msys*)    cmd < win_deps.bat ;;
-  *)        eval 'echo "UNKNOW SYSTEM: $OSTYPE" && exit 1' ;;
+  *)        echo "UNKNOW SYSTEM: $OSTYPE";
+              exit 1 ;;
 esac
 
 # USING GITHUB CLI
@@ -36,4 +37,8 @@ gh repo clone Pennywort-and-Potato/something_client
 
 [ -e $ENV_FILE ] && rm "$ENV_FILE"
 echo -e $ENV_CONTENT >> $ENV_FILE
+echo "INSTALLING NEXT DEPENDENCY"
+cd something_client;
+npm i -g yarn || yarn
 echo "COMPLETE. SEE README FOR FURTHER INFOMATION"
+read -n 1 -s
