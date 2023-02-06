@@ -15,8 +15,10 @@ clean_build:
 	docker-compose down
 rebuild_client:
 	docker-compose down
+	docker-compose rm -f client
 	docker-compose build --no-cache client;
 rebuild_api:
 	docker-compose down
+	docker-compose rm -f api
 	docker-compose build --no-cache api;
 
