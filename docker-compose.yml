@@ -1,17 +1,5 @@
 version: '0.0.1'
 services:
-  pg:
-    image: "postgres:15.1"
-    restart: on-failure
-    env_file: ".env"
-    environment:
-      - POSTGRES_USER=${DBU}
-      - POSTGRES_PASSWORD=${DBP}
-    volumes:
-      - "${ENVIRONMENT}_pg:/var/lib/psql/"
-      - "${ENVIRONMENT}_pg:/var/lib/postgresql/data/"
-    ports:
-      - "5432:5432"
   api:
     build:
       context: "./something_server"
@@ -19,10 +7,6 @@ services:
     env_file:
       - .env
     environment:
-      - DBU=${DBU}
-      - DBP=${DBP}
-      - DBH=${DBH}
-      - DBHP=${DBHP}
       - DBA=${DBA}
       - AUTH_SECRET=${AUTH_SECRET}
       - RAILS_ENV=${RAILS_ENV}
@@ -31,10 +15,6 @@ services:
     volumes:
       - ./something_server:/something_server
       - ${ENVIRONMENT}_bundle:/usr/local/bundle
-    depends_on:
-      - pg
-    links:
-      - pg
   client:
     build:
       context: "./something_client"
@@ -47,7 +27,6 @@ services:
       - ${ENVIRONMENT}_node_modules:/something_client/node_modules
     depends_on:
       - api
-      - pg
     links:
       - api
 volumes:
