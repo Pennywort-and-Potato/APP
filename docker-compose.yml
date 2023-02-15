@@ -7,10 +7,11 @@ services:
     env_file:
       - .env
     environment:
-      - DBA=${DBA}
+      - DBU=${DBU}
+      - DBP=${DBP}
+      - DBH=${DBH}
       - AUTH_SECRET=${AUTH_SECRET}
       - RAILS_ENV=${RAILS_ENV}
-      - DATABASE_URL=${DATABASE_URL}
     ports:
       - "4000:4000"
     volumes:
