@@ -17,10 +17,6 @@ esac
 gh config set prompt disabled
 gh auth login
 gh repo clone Pennywort-and-Potato/something_server
-gh repo clone Pennywort-and-Potato/something_client
 
-echo "INSTALLING NEXT DEPENDENCY"
-cd something_client;
-npm i -g yarn || yarn
 echo "COMPLETE. SEE README FOR FURTHER INFOMATION"
 read -n 1 -s
